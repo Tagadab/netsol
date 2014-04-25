@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<OrderRequest>
+  <%= header %>
+  <Body>
+    <AuthorizedAgent SystemUserType="partner">
+      <SystemUser>
+        <UserID><%= @user %></UserID>
+        <Password><%= @pass %></Password>
+      </SystemUser>
+    </AuthorizedAgent>
+    <CustomerID><%= @customer_id %></CustomerID>
+    <Billing>
+      <AutoRenew><%= @auto_renew %></AutoRenew>
+    </Billing>
+    <Product>
+      <ModifyRegistration>
+        <DomainName><%= @domain_name %></DomainName>
+      </ModifyRegistration>
+    </Product>
+  </Body>
+</OrderRequest>

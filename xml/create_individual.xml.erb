@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<UserRequest>
+  <%= header %>
+  <Body>
+  <CreateIndividual>
+    <LoginName><%= @individual[:login_name] %></LoginName>
+    <Password><%= @invididual[:password] %></Password>
+    <FirstName><%= @individual[:first_name] %></FirstName>
+    <MiddleName><%= @individual[:middle_name] %></MiddleName>
+    <LastName><%= @individual[:last_name] %></LastName>
+    <Address>
+      <AddressLine1><%= @individual[:address][:line_1] %></AddressLine1>
+      <City><%= @individual[:address][:city] %></City>
+      <State><%= @individual[:address][:state] %></State>
+      <PostalCode><%= @individual[:address][:post_code] %></PostalCode>
+      <CountryCode><%= @individual[:address][:country_code] %></CountryCode>
+    </Address>
+    <Phone><%= @individual[:phone] %></Phone>
+    <Fax><%= @individual[:fax] %></Fax>
+    <Email><%= @individual[:email] %></Email>
+    <AuthQuestion><%= @individual[:auth][:question] %></AuthQuestion>
+    <AuthAnswer><%= @individual[:auth][:answer] %></AuthAnswer>
+  </CreateIndividual>
+  </Body>
+</UserRequest>
