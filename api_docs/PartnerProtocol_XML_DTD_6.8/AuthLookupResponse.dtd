@@ -1,0 +1,34 @@
+<!-- ===================================================================== -->
+<!-- ====  Product AuthLookup Response Declaration. ========================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT AuthLookupResponse (ResponseHeader, Body ) >
+
+
+<!-- ===================================================================== -->
+<!-- ====  Products returned from the lookup request. ==================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT Body (
+   (DomainAuthCodeInfo+ ), 
+     Status ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+	
+<!-- For backward compatibility ExpirationDate and PurchaseDate are defined here -->
+<!ELEMENT ExpirationDate (#PCDATA ) >
+<!ELEMENT PurchaseDate (#PCDATA ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+
+
+<!-- sccsID "%TC-INFO%" -->

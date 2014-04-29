@@ -1,0 +1,19 @@
+<!-- ===================================================================== -->
+<!-- ====  Error Response Declarations =================================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT ErrorResponse (ResponseHeader, Body ) >	
+<!ELEMENT ResponseHeader (ReferenceNumber, Timestamp, Comments? ) >
+<!ELEMENT Body (StatusCode, Description, OriginalData ) >
+
+<!ELEMENT OriginalData ANY >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % CommonDeclarations SYSTEM "CommonDeclarations.dtd">
+%CommonDeclarations;
+
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,10 @@
+<!-- ===================================================================== -->
+<!-- ====  Message Response Header Declarations ========================== -->
+<!-- ===================================================================== -->
+<!ELEMENT ResponseHeader (VERSION_6_8, ReferenceNumber, Timestamp, Comments?)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % CommonDeclarations SYSTEM "CommonDeclarations.dtd">
+%CommonDeclarations;
+<!-- sccsID "%TC-INFO%" -->

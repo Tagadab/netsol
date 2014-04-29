@@ -1,0 +1,26 @@
+<!-- ===================================================================== -->
+<!-- ====  This DTD remains for backward compatibility. ================== -->
+<!-- ===================================================================== -->
+<!ELEMENT EmailForwardingRequest (RequestHeader, Body)>
+<!ELEMENT Body (AuthorizedAgent, CustomerID, Billing?, Product)>
+<!ELEMENT Product (CreateEmailForwardingAndDomain | ModifyEmailForwarding | DeleteEmailForwardingAndDomain | RenewEmailForwardingAndDomain)>
+<!ELEMENT CreateEmailForwardingAndDomain (CreateRegistration | CreateParking)>
+<!ELEMENT CreateRegistration (DomainName+, PurchasePeriod, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, Hosts?, ForwardingEmailAddress)>
+<!ELEMENT CreateParking (DomainName+, PurchasePeriod, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, ForwardingEmailAddress,WebForwardingProduct*,ADNS*)>
+<!ELEMENT ModifyEmailForwarding (EmailForwardingProduct+, ForwardingEmailAddress)>
+<!ELEMENT EmailForwardingProduct ((EmailAddress | ProductID))>
+<!ELEMENT EmailAddress (#PCDATA)>
+<!ELEMENT ForwardingEmailAddress (#PCDATA)>
+<!ELEMENT DeleteEmailForwardingAndDomain (DomainName+ | EmailForwardingProduct+)>
+<!ELEMENT RenewEmailForwardingAndDomain ((DomainName+ | EmailForwardingProduct+), PurchasePeriod)>
+<!ELEMENT ADNS (DomainName, ResourceRecords?)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!ENTITY % DomainData SYSTEM "DomainData.dtd">
+%DomainData;
+<!ENTITY % WebForwardingProduct SYSTEM "WebForwardingProduct.dtd">
+%WebForwardingProduct;
+<!-- sccsID "%TC-INFO%" -->

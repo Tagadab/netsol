@@ -1,0 +1,39 @@
+<!-- ===================================================================== -->
+<!-- ====  Security Request Message and Body Declaration. ================ -->
+<!-- ===================================================================== -->
+
+<!ELEMENT SecurityRequest (RequestHeader, Body)>
+<!ELEMENT Body (
+	(AuthenticatePartner | 
+	 AuthenticatePartnerAndGetPartnerInfo | 
+	 AuthenticateCustomer | 
+	 AuthenticateCustomerAndGetCustomerInfo | 
+	 AuthorizePartner | 
+	 AuthorizeCustomer ) ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT AuthenticatePartner (Partner)>
+<!ELEMENT AuthenticatePartnerAndGetPartnerInfo (Partner)>
+<!ELEMENT AuthenticateCustomer (Customer)>
+<!ELEMENT AuthenticateCustomerAndGetCustomerInfo (Customer)>
+
+<!ELEMENT AuthorizePartner (Partner, CustomerData)>
+<!ELEMENT AuthorizeCustomer (Customer, ProductID)>
+
+<!ELEMENT Partner ((UserID | NicHandle), Password)>
+<!ELEMENT Customer ((UserID | NicHandle | LoginName), Password)>
+<!ELEMENT CustomerData (CustomerID, ProductID?)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+
+<!-- sccsID "%TC-INFO%" -->

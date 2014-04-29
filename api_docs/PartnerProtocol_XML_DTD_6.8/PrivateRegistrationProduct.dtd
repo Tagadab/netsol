@@ -1,0 +1,19 @@
+<!-- ===================================================================== -->
+<!-- ====  Private Registration product actions =========================== -->
+<!-- ===================================================================== -->
+
+<!-- ====  Create private registration products only ===================== -->
+<!ELEMENT CreatePrivateRegistration ( DomainName+,
+						  PurchasePeriod ) >
+
+<!-- ====  Delete private registration products only ===================== -->
+<!ELEMENT DeletePrivateRegistration ( DomainName+ ) >
+	
+<!-- ====  Renew private registration products only ====================== -->
+<!ELEMENT RenewPrivateRegistration ( DomainName+,
+						 PurchasePeriod ) >
+        
+<!-- ====  Modify private registration products only ===================== -->
+<!ELEMENT ModifyPrivateRegistration ( DomainName+ )>  
+
+

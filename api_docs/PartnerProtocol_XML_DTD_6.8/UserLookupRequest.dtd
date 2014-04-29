@@ -1,0 +1,39 @@
+<!-- ===================================================================== -->
+<!-- ====  User Lookup Request Message and Body Declaration. ============= -->
+<!-- ===================================================================== -->
+
+<!ELEMENT UserLookupRequest (RequestHeader, Body)>
+
+<!ELEMENT Body (
+   AuthorizedAgent, 
+   CustomerID?,
+   (LookupUser | CheckLoginNameAvailability | GetCALogin ) ) >
+	
+<!ELEMENT LookupUser (
+   UserID+ | 
+   NicHandle+ | 
+   DomainName | 
+   ProductID |
+   LoginName+ ) >
+   
+<!ELEMENT CheckLoginNameAvailability ( LoginName ) >
+  
+<!-- ========= returns CIRA login and temporary password given user id === -->
+<!ELEMENT GetCALogin ( UserID ) >
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!-- For backward compatibility DomainName is defined here -->
+<!ELEMENT DomainName (#PCDATA)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,68 @@
+<!-- ===================================================================== -->
+<!-- ====  This DTD remains for backward compatibility. ================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT DomainName (#PCDATA)>
+
+<!ELEMENT AddResourceRecords ( ResourceRecords ) >
+<!ELEMENT RemoveResourceRecords ( ResourceRecords ) >
+<!ELEMENT ResourceRecords (
+        Action*,
+	A*,
+	CNAME*,
+	MX* ) >
+
+<!ELEMENT A ( RecordName, IPAddress)  >
+<!ELEMENT CNAME ( RecordName, CanonicalName )  >
+<!ELEMENT MX ( RecordName, Preference, Exchange )  >
+<!ELEMENT RecordName (#PCDATA)>
+<!ELEMENT IPAddress (#PCDATA)>
+<!ELEMENT CanonicalName (#PCDATA)>
+<!ELEMENT Preference (#PCDATA)>
+<!ELEMENT Exchange (#PCDATA)>
+
+<!ELEMENT Hosts ( Host1, 
+				( Host2, 
+				( Host3, 
+				( Host4,
+				( Host5,
+				( Host6,
+				( Host7,
+				( Host8,
+				( Host9,
+				( Host10,
+				( Host11,
+				( Host12,
+				( Host13
+ 				)? )? )? )? )? )? )? )? )? )? )? )? )? >
+
+<!ELEMENT Host1 ( Host ) >
+<!ELEMENT Host2 ( Host ) >
+<!ELEMENT Host3 ( Host ) >
+<!ELEMENT Host4 ( Host ) >
+<!ELEMENT Host5 ( Host ) >
+<!ELEMENT Host6 ( Host ) >
+<!ELEMENT Host7 ( Host ) >
+<!ELEMENT Host8 ( Host ) >
+<!ELEMENT Host9 ( Host ) >
+<!ELEMENT Host10 ( Host ) >
+<!ELEMENT Host11 ( Host ) >
+<!ELEMENT Host12 ( Host ) >
+<!ELEMENT Host13 ( Host ) >
+
+<!ELEMENT Host ( ( HostID | HostName ), HostCoordinator?,
+	HostIP1?, HostIP2?, HostIP3?, HostIP4?, HostIP5? ) >
+
+<!ELEMENT NewHost ( HostName, HostCoordinator?, 
+	HostIP1, HostIP2?, HostIP3?, HostIP4?, HostIP5? ) >
+
+<!ELEMENT HostID (#PCDATA) >
+<!ELEMENT HostName (#PCDATA) >
+<!ELEMENT HostCoordinator ( UserID | NicHandle ) >
+<!ELEMENT HostIP1 (#PCDATA) >
+<!ELEMENT HostIP2 (#PCDATA) >
+<!ELEMENT HostIP3 (#PCDATA) >
+<!ELEMENT HostIP4 (#PCDATA) >
+<!ELEMENT HostIP5 (#PCDATA) >
+<!ELEMENT Action (#PCDATA)>
+<!-- sccsID "%TC-INFO%" -->

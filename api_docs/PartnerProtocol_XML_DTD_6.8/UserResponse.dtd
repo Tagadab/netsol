@@ -1,0 +1,21 @@
+<!-- ===================================================================== -->
+<!-- ====  User Response Message and Body Declaration. =================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT UserResponse (ResponseHeader, Body)>
+
+<!ELEMENT Body (
+	Status, 
+	UserID?, 
+	NicHandle?, 
+	LoginName? ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+
+<!-- sccsID "%TC-INFO%" -->

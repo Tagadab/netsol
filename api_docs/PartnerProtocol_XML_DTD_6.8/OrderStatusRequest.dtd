@@ -1,0 +1,33 @@
+<!-- ===================================================================== -->
+<!-- ====  Order Lookup Request Message and Body Declaration. ============ -->
+<!-- ===================================================================== -->
+<!ELEMENT OrderStatusRequest (RequestHeader, Body)>
+<!-- Deprecation: The CustomerID here is deprecated and may be removed in -->
+<!-- future versions.  Please avoid using it -->
+<!ELEMENT Body (AuthorizedAgent, CustomerID?, Order)>
+<!-- ===================================================================== -->
+<!-- ====  List of order query criteria. ================================= -->
+<!-- ===================================================================== -->
+<!ELEMENT Order ((ReferenceNumber | OrderID | Customer | Product | Domain | OrderStatusInfo | OrderSubmissionDate), TransferPaging?)>
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!ELEMENT Customer (UserID, OrderSubmissionDate?)>
+<!ELEMENT Product (ProductID, OrderSubmissionDate?)>
+<!ELEMENT Domain (DomainName+, OrderSubmissionDate?)>
+<!ELEMENT OrderStatusInfo (OrderStatus, OrderSubmissionDate?)>
+<!ELEMENT OrderStatus EMPTY>
+<!ATTLIST OrderStatus
+	OrderStatusType (success | pending | failed | partial) #REQUIRED
+>
+<!ELEMENT OrderSubmissionDate (DateRange)>
+<!ELEMENT DomainName (#PCDATA)>
+<!ELEMENT TransferPaging (StartRecord, MaximumRecords)>
+<!ELEMENT StartRecord (#PCDATA)>
+<!ELEMENT MaximumRecords (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!-- sccsID "%TC-INFO%" -->

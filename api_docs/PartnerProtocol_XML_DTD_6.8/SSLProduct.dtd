@@ -1,0 +1,90 @@
+<!-- ===================================================================== -->
+<!-- ====  SSL  product ===================================================== -->
+<!-- ===================================================================== -->
+<!-- ====  Common commands for both Certificate & Seal products =================== -->
+<!-- ====  For Certificate product, CSRData is required for create, renew ============== -->
+<!ELEMENT CreateSSL (SSLProductName, (CertProduct+ | SealProduct+), PurchasePeriod, SubscribersAgreement, AccuracyAgreement?, EVSubscriber?)>
+<!ELEMENT RenewSSL (SSLProductName, SSLProductToRenew+, PurchasePeriod, SubscribersAgreement, AccuracyAgreement?, EVSubscriber?)>
+<!ELEMENT ReissueSSL (ProductID, DomainName?, CSRData?, Contacts, AccuracyAgreement?)>
+<!ELEMENT RevokeSSL (ServiceInstID, (RevokeReason | OtherReason))>
+<!-- ====  Certificate specific commands ========================================-->
+<!ELEMENT DownloadCertificate (ServiceInstID, CertificateFormat)>
+<!-- ====  Seal specific commands ============================================-->
+<!ELEMENT GetSealCode (ServiceInstID, SealType, SealColor, SealShape, PublishingType)>
+<!-- ===================================================================== -->
+<!-- ===================================================================== -->
+<!ELEMENT CertProduct (CSRData, Contacts)>
+<!ELEMENT SealProduct (DomainName, Contacts)>
+<!ELEMENT SSLProductToRenew (ProductID, CSRData?, Contacts)>
+<!ELEMENT SSLProductName EMPTY>
+<!ATTLIST SSLProductName
+	SSLProductName (Basic | Pro | WildCard | SiteConfirmSeal | EV) #REQUIRED
+>
+<!-- ====  CSR Data ========================================================-->
+<!-- ===================================================================== -->
+<!ELEMENT CSRData (CSR, ServerSelectionID)>
+<!ELEMENT CSR (#PCDATA)>
+<!-- Please see XML documentation for a list of server selections -->
+<!ELEMENT ServerSelectionID (#PCDATA)>
+<!-- Certificate format for downloading certificate-->
+<!ELEMENT CertificateFormat EMPTY>
+<!ATTLIST CertificateFormat
+	Selection (UTNAddTrustServerCA | AddTrustExternalCA | NetworkSolutionsCA | BundledCert | DomainSpecific | EVRootCA | IntermediateSSLCA) #REQUIRED
+>
+<!ELEMENT SealType EMPTY>
+<!ATTLIST SealType
+	Selection (Basic | ProWildCard | SiteConfirmSeal | EV) #REQUIRED
+>
+<!ELEMENT SealColor EMPTY>
+<!ATTLIST SealColor
+	Selection (Green | Blue) #REQUIRED
+>
+<!ELEMENT SealShape EMPTY>
+<!ATTLIST SealShape
+	Selection (Square | Rectangular) #REQUIRED
+>
+<!ELEMENT PublishingType EMPTY>
+<!ATTLIST PublishingType
+	Selection (HTTP | HTTPS) #REQUIRED
+>
+<!-- ====  POC Details ======================================================-->
+<!-- ===================================================================== -->
+<!ELEMENT Contacts (ValidationContact, OrderContact, CertificateRequester?, CertificateApprover?, ContractSigner?)>
+<!-- ====  Validation Contact ================================================= -->
+<!ELEMENT ValidationContact (EntityType, AddressLine1, AddressLine2?, AddressLine3?, POBox?, City, State, PostalCode, CountryCode, Department?, CompanyName?, ContactFirstName, ContactLastName, ContactPhone, DUNS?, AssumedName?, JurisdictionOfIncorporation?, IncorporatingAgency?, RegistrationNumber?, MainPhoneNumber?)>
+<!-- ====  CertificateRequester ================================================= -->
+<!ELEMENT CertificateRequester (FirstName, LastName, Title, RelationshipToApplicant, AddressLine1, AddressLine2?, AddressLine3?, POBox?, City, State, PostalCode, CountryCode, Phone, Email)>
+<!-- ====  CertificateApprover ================================================= -->
+<!ELEMENT CertificateApprover (FirstName, LastName, Title, RelationshipToApplicant, AddressLine1, AddressLine2?, AddressLine3?, POBox?, City, State, PostalCode, CountryCode, Phone, Email)>
+<!-- ====  ContractSigner ================================================= -->
+<!ELEMENT ContractSigner (FirstName, LastName, Title, RelationshipToApplicant, AddressLine1, AddressLine2?, AddressLine3?, POBox?, City, State, PostalCode, CountryCode, Phone, Email)>
+<!-- ====  Order Contact ===================================================== -->
+<!ELEMENT OrderContact (FirstName, LastName, Phone, Email)>
+<!-- Entity Type  -->
+<!ELEMENT EntityType EMPTY>
+<!ATTLIST EntityType
+	Selection (Individual | OrganizationCompany | EducationalInstitution | GovernmentOrganization) #REQUIRED
+>
+<!ELEMENT ContactFirstName (#PCDATA)>
+<!ELEMENT ContactLastName (#PCDATA)>
+<!ELEMENT ContactPhone (#PCDATA)>
+<!ELEMENT Department (#PCDATA)>
+<!-- Company Registration Number (optional)  -->
+<!ELEMENT DUNS (#PCDATA)>
+<!-- ===================================================================== -->
+<!ELEMENT RevokeReason EMPTY>
+<!ATTLIST RevokeReason
+	Selection (PrivateKeyCompromised | AffiliationChanged | Superseded | CessationOfOperations) #REQUIRED
+>
+<!ELEMENT OtherReason (#PCDATA)>
+<!ELEMENT EVSubscriber (FirstName, LastName)>
+<!ELEMENT JurisdictionOfIncorporation (City?, State?, CountryCode)>
+<!ELEMENT AssumedName (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT RelationshipToApplicant (#PCDATA)>
+<!ELEMENT IncorporatingAgency (#PCDATA)>
+<!ELEMENT MainPhoneNumber (#PCDATA)>
+<!ELEMENT RegistrationNumber (#PCDATA)>
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!--none -->
+<!-- sccsID "%TC-INFO%" -->

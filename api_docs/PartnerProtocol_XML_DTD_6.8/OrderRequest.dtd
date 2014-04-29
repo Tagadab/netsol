@@ -1,0 +1,31 @@
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Helen Nguyen (private) -->
+<!-- ===================================================================== -->
+<!-- ====  Product Order Request Message and Body Declaration. =========== -->
+<!-- ===================================================================== -->
+<!ELEMENT OrderRequest (RequestHeader, Body)>
+<!ELEMENT Body (AuthorizedAgent, CustomerID, Billing?, Product)>
+<!-- ===================================================================== -->
+<!-- ====  Catalog of supported Product Actions. ========================= -->
+<!-- ===================================================================== -->
+<!ELEMENT Product (CreateRegistration | ModifyRegistration | ConvertToRegistration | DeleteRegistration | RenewRegistration | TransferInternalToRegistration | InboundTransferToRegistration+ | CreateParking | DeleteParking | RenewParking | ModifyParking | TransferInternalToParking | InboundTransferToParking+ | ConvertToParking | CascadeDeleteDomain | CascadeRenewDomain | CreateHost | ModifyHost | DeleteHost | ModifyCustomerName | CreatePrivateRegistration | RenewPrivateRegistration | DeletePrivateRegistration | ModifyPrivateRegistration | RenewDomainsOnly | CreateWebForwarding | ModifyWebForwarding | DeleteWebForwarding | RenewWebForwarding | PreRegister | PreRegisterAT | PreRegisterAD | PreRegisterB | PreRegisterLandRush | RetrieveAuthCode | CreateSSL | RenewSSL | ReissueSSL | RevokeSSL | DownloadCertificate | GetSealCode | LandRush)>
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!-- For backward compatibility ExpirationDate and PurchaseDate are defined here -->
+<!ELEMENT ExpirationDate (#PCDATA)>
+<!ELEMENT PurchaseDate (#PCDATA)>
+<!ELEMENT ModifyCustomerName ((FirstName, MiddleName?, LastName) | CompanyName)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!ENTITY % DomainProduct SYSTEM "DomainProduct.dtd">
+%DomainProduct;
+<!ENTITY % HostProduct SYSTEM "HostProduct.dtd">
+%HostProduct;
+<!ENTITY % PrivateRegistrationProduct SYSTEM "PrivateRegistrationProduct.dtd">
+%PrivateRegistrationProduct;
+<!ENTITY % SSLProduct SYSTEM "SSLProduct.dtd">
+%SSLProduct;
+<!-- sccsID "%TC-INFO%" -->

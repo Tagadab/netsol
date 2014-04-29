@@ -1,0 +1,189 @@
+<!-- ===================================================================== -->
+<!-- ====  Domain Registration product actions =========================== -->
+<!-- ===================================================================== -->
+<!ELEMENT CreateRegistration (DomainName+, PurchasePeriod, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, Hosts?, SupplementalRegistryData?, PrivateRegistrationDomains*,DomainIntendToResolve*)>
+<!ELEMENT ModifyRegistration (DomainName+, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?,Hosts?, MemberID*)>
+<!ELEMENT ConvertToRegistration (DomainName+, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, Hosts?)>
+<!ELEMENT DeleteRegistration (DomainName+)>
+<!ELEMENT RenewRegistration (DomainName+, PurchasePeriod)>
+<!ELEMENT TransferInternalToRegistration (DomainName+, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, Hosts?, SupplementalRegistryData?)>
+<!ELEMENT InboundTransferToRegistration (ToCustomer, DomainName+, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, Hosts?, AuthCodeInfo*, SupplementalRegistryData?, PrivateRegistrationDomains*)>
+<!-- ==== Domain Parking product actions ================================= -->
+<!ELEMENT CreateParking (DomainName+, PurchasePeriod, TechContact?, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, SupplementalRegistryData?, PrivateRegistrationDomains*, WebForwardingProduct*, ADNS*,DomainIntendToResolve*)>
+<!ELEMENT ModifyParking (DomainName+, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, ModifiedParking*,MemberID*)>
+<!ELEMENT ConvertToParking (DomainName+, AdminContact?, BillContact?, BulkWhoisOptOut?, ADNS*)>
+<!ELEMENT DeleteParking (DomainName+)>
+<!ELEMENT RenewParking (DomainName+, PurchasePeriod)>
+<!ELEMENT TransferInternalToParking (DomainName+, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, ADNS*, SupplementalRegistryData?)>
+<!ELEMENT InboundTransferToParking (ToCustomer, DomainName+, AdminContact?, BillContact?, BulkWhoisOptOut?, DomainProtect?, AuthCodeInfo*, SupplementalRegistryData?, PrivateRegistrationDomains*, WebForwardingProduct*)>
+
+<!ELEMENT LanguageSelection (#PCDATA)>
+<!-- ==== Domain product actions applicable to any type of domain product == -->
+<!-- Delete Parking, or Registration, or SelfManaged product. -->
+<!ELEMENT CascadeDeleteDomain (DomainName+)>
+<!-- Renew Parking, or Registration, or SelfManaged. -->
+<!ELEMENT CascadeRenewDomain (DomainName+, PurchasePeriod)>
+<!-- Renew domains only. -->
+<!ELEMENT RenewDomainsOnly (DomainName+, PurchasePeriod)>
+<!-- ===================================================================== -->
+<!-- ==== Product Lookup queries and Element returned in lookup reply. === -->
+<!-- ===================================================================== -->
+<!ELEMENT LookupDomain (ProductID+ | DomainName+)>
+<!ELEMENT Domain (ProductID, ProductType, DomainNameProperties, ProductStatus, DomainProtect, LegalLock, CustomerID, AdminContact?, TechContact?, BillContact?, BulkWhoisOptOut?, AutoRenew, PurchaseDate, ExpirationDate, A*, CNAME*, MX*, NicHandle?, HostData*, PrivateRegistrationActive?, WebForwardingProduct?)>
+
+<!-- ===================================================================== -->
+<!-- ==== Domain AuthCode request Element ================================ -->
+<!-- ===  This request will result in the domain(s) AuthCode being sent == -->
+<!-- ===  via email to the domains Primary contact ======================= -->
+<!ELEMENT RetrieveAuthCode (DomainName+)>
+
+<!-- ===================================================================== -->
+<!-- ===================================================================== -->
+<!-- ==== Domain AuthCode Lookup  request Element ================================ -->
+<!-- ===  This request will result in the domain(s) AuthCode being sent == -->
+<!-- ===  in the response ====================== -->
+<!--<!ELEMENT AuthLookupRequest (DomainName+)>-->
+<!--<!ELEMENT AuthCodeLookup (AuthCode)>-->
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!-- For backward compatibility DomainNameProperties is defined here -->
+<!ELEMENT DomainNameProperties (#PCDATA)>
+<!ATTLIST DomainNameProperties
+	encoded CDATA "false"
+>
+<!ELEMENT ResourceRecords (Action, A*, CNAME*, MX*)>
+<!ELEMENT DomainName (#PCDATA)>
+<!ELEMENT A (RecordName, IPAddress)>
+<!ELEMENT CNAME (RecordName, CanonicalName)>
+<!ELEMENT MX (RecordName, Preference, Exchange)>
+<!ELEMENT RecordName (#PCDATA)>
+<!ELEMENT IPAddress (#PCDATA)>
+<!ELEMENT CanonicalName (#PCDATA)>
+<!ELEMENT Preference (#PCDATA)>
+<!ELEMENT Exchange (#PCDATA)>
+<!ELEMENT Hosts (Host1, (Host2, (Host3, (Host4, (Host5, (Host6, (Host7, (Host8, (Host9, (Host10, (Host11, (Host12, (Host13)?)?)?)?)?)?)?)?)?)?)?)?)?>
+<!ELEMENT Host1 (Host)>
+<!ELEMENT Host2 (Host)>
+<!ELEMENT Host3 (Host)>
+<!ELEMENT Host4 (Host)>
+<!ELEMENT Host5 (Host)>
+<!ELEMENT Host6 (Host)>
+<!ELEMENT Host7 (Host)>
+<!ELEMENT Host8 (Host)>
+<!ELEMENT Host9 (Host)>
+<!ELEMENT Host10 (Host)>
+<!ELEMENT Host11 (Host)>
+<!ELEMENT Host12 (Host)>
+<!ELEMENT Host13 (Host)>
+<!ELEMENT PrivateRegistrationDomains (#PCDATA)>
+<!ELEMENT PrivateRegistrationActive (#PCDATA)>
+<!ELEMENT DomainIntendToResolve (DomainName, DomainResolve)>
+<!ELEMENT DomainResolve EMPTY>
+<!ATTLIST DomainResolve
+	Selection (Yes | No) #REQUIRED
+>
+
+
+<!ELEMENT MemberID (DomainName, MembershipID)>
+<!ELEMENT MembershipID (#PCDATA)>
+
+
+
+<!-- ===================== 2Q 2005 Release ================= -->
+<!ELEMENT AuthCodeInfo (DomainName, AuthCode)>
+<!ELEMENT AuthCode (#PCDATA)>
+<!ELEMENT ModifiedParking (DomainName, (ResourceRecords* | UnderConstructionPage))>
+<!ELEMENT Action (#PCDATA)>
+<!ELEMENT ADNS (DomainName, ResourceRecords?)>
+<!ELEMENT UnderConstructionPage (#PCDATA)>
+<!-- ===================== PreRegister ==================== -->
+<!ELEMENT PreRegister (XXXDomain+, PurchasePeriod, TechContact, AdminContact, BillContact)>
+<!ELEMENT XXXDomain (DomainName,IndustryMember, IntendToResolve, Phases)>
+<!ELEMENT IndustryMember EMPTY>
+<!ATTLIST IndustryMember
+	Status (Yes) #REQUIRED
+>
+
+<!ELEMENT IntendToResolve EMPTY>
+<!ATTLIST IntendToResolve
+	IntendToResolve (Yes | No) #REQUIRED
+>
+
+<!ELEMENT Phases EMPTY>
+<!ATTLIST Phases
+	Phase1 (PreregGA) #REQUIRED
+>
+
+<!-- ===================== PreRegisterAT ==================== -->
+<!ELEMENT PreRegisterAT (XXXDomainSunriseAT+, PurchasePeriod, TechContact, AdminContact, BillContact)>
+
+<!ELEMENT XXXDomainSunriseAT (DomainName,TrademarkInfo,TradeMarkType)>
+<!ELEMENT TrademarkInfo (RegisteredTradeMark, CountryCode, RegistrationNum, Applicant, RegistrationDate)>
+<!ELEMENT Applicant EMPTY>
+<!ATTLIST Applicant
+	Selection (Owner | Assignee) #REQUIRED
+>
+
+<!ELEMENT RegisteredTradeMark (#PCDATA)>
+<!ELEMENT RegistrationNum (#PCDATA)>
+<!ELEMENT RegistrationDate (#PCDATA)>
+
+<!ELEMENT TradeMarkType EMPTY>
+<!ATTLIST TradeMarkType
+	Phase (SunriseAT) #REQUIRED
+>
+
+
+<!-- ===================== PreRegisterAD ==================== -->
+<!ELEMENT PreRegisterAD (XXXDomainSunriseAD+, PurchasePeriod, TechContact, AdminContact, BillContact)>
+
+<!ELEMENT XXXDomainSunriseAD (DomainName, ExistingDomainName, CreateDate, TradeMarkTypeAD)>
+
+<!ELEMENT ExistingDomainName (#PCDATA)>
+<!ELEMENT CreateDate (#PCDATA)>
+<!ELEMENT TradeMarkTypeAD EMPTY>  
+<!ATTLIST TradeMarkTypeAD
+   Phase (SunriseAD) #REQUIRED
+> 
+
+
+<!-- ===================== PreRegisterB ==================== -->
+<!ELEMENT PreRegisterB (XXXDomainSunriseB+, TechContact, AdminContact, BillContact)>
+
+<!ELEMENT XXXDomainSunriseB (DomainName,TrademarkDetail,TradeMarkTypeB)>
+<!ELEMENT TrademarkDetail (TradeMarkRegistered, CountryCode, RegistrationNumberInfo, ApplicantDetail, TrademarkRegistrationDate)>
+<!ELEMENT ApplicantDetail EMPTY>
+<!ATTLIST ApplicantDetail
+	Selection (Owner | Assignee) #REQUIRED
+>
+
+<!ELEMENT TradeMarkRegistered (#PCDATA)>
+<!ELEMENT RegistrationNumberInfo (#PCDATA)>
+<!ELEMENT TrademarkRegistrationDate (#PCDATA)>
+
+<!ELEMENT TradeMarkTypeB EMPTY>
+<!ATTLIST TradeMarkTypeB
+	Phase (SunriseB) #REQUIRED
+>
+
+<!-- ===================== PreRegisterLandRush ==================== -->
+<!ELEMENT PreRegisterLandRush (XXXDomainLandRush+, PurchasePeriod, TechContact, AdminContact, BillContact)>
+<!ELEMENT XXXDomainLandRush (DomainName, Phase)>
+
+<!ELEMENT Phase EMPTY>
+<!ATTLIST Phase
+	Phase (LandRush) #REQUIRED
+>
+
+
+<!-- ===================== LandRush ==================== --> 
+<!ELEMENT LandRush (DomainName+, PurchasePeriod, TechContact, AdminContact, BillContact)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!ENTITY % WebForwardingProduct SYSTEM "WebForwardingProduct.dtd">
+%WebForwardingProduct;
+<!-- ===================================================================== -->
+<!--none -->
+<!-- sccsID "%TC-INFO%" -->

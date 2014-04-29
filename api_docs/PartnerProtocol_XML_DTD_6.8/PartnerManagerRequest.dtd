@@ -1,0 +1,71 @@
+<!-- ===================================================================== -->
+<!-- ====  Partner Manager Request Message and Body Declaration. ========= -->
+<!-- ===================================================================== -->
+<!ELEMENT PartnerManagerRequest (RequestHeader, Body)>
+<!ELEMENT Body (FindAllCustomersForPartner | FindAllDomainsForCustomer | FindAllDomainsForPartner | FindDomainsWithPrivateRegistration | FindDomainsWithWebForwarding | ConsolidateAllCustomerProducts | ConsolidateSelectedCustomerProducts | GetPartnerData | FindPreRegisteredDomainsForPartner | 
+FindAllSSLProductsForPartner | FindSSLProductsForPartner  | FindDetailedSSLProduct)>
+<!-- ===================================================================== -->
+<!-- ====  Supported Partner Manager Actions. ============================ -->
+<!-- ===================================================================== -->
+<!-- Find all customers for a parnter, created within the date range -->
+<!ELEMENT FindAllCustomersForPartner (CreatedDateRange?)>
+<!-- Find all domains for parnter, purchased within the date range -->
+<!-- or having an expiration date within the date range -->
+<!ELEMENT FindAllDomainsForPartner (PurchaseDateRange? | ExpirationDateRange?)>
+<!-- Find all domains owned by a customer, purchased within the -->
+<!-- date range or having an expiration date within the date range -->
+<!ELEMENT FindAllDomainsForCustomer (CustomerID, (PurchaseDateRange? | ExpirationDateRange?))>
+<!-- Move all products owned by one customer to another customer -->
+<!ELEMENT ConsolidateAllCustomerProducts (FromCustomer, ToCustomer)>
+<!-- Move the specified products from one customer to another customer -->
+<!ELEMENT ConsolidateSelectedCustomerProducts (FromCustomer, ToCustomer, (DomainName+ | ProductID+))>
+<!-- Get information about the partner's account -->
+<!ELEMENT GetPartnerData EMPTY>
+<!-- Get domains with active or not active private registration products -->
+<!-- indicated by the PrivateRegistrationActive flag.  The value of      -->
+<!-- PrivateRegistrationActive can be true or false                  -->
+<!ELEMENT FindDomainsWithPrivateRegistration (PrivateRegistrationActive, StartRecord, MaximumRecords)>
+<!-- Get webforwarding domains or domains that are not a webforwarding product -->
+<!-- indicated by the WithWebFwd flag.  The value of      -->
+<!-- WithWebFwd can be true or false                  -->
+<!ELEMENT FindDomainsWithWebForwarding (WithWebFwd, StartRecord, MaximumRecords)>
+<!-- Get PreRegistered domains , TLD will default to .eu for this release -->
+<!ELEMENT FindPreRegisteredDomainsForPartner EMPTY>
+<!-- High level SSL Products query -->
+<!ELEMENT FindAllSSLProductsForPartner EMPTY>
+<!ELEMENT FindSSLProductsForPartner ( CustomerID | PurchaseDateRange | ExpirationDateRange | WildCardSearch | DomainName | SSLProductStatus)>
+<!-- Detailed query for a specific SSL product  -->
+<!ELEMENT FindDetailedSSLProduct (ProductID)>
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!ELEMENT TLD (#PCDATA)>
+<!ELEMENT StartRecord (#PCDATA)>
+<!ELEMENT MaximumRecords (#PCDATA)>
+<!ELEMENT PrivateRegistrationActive EMPTY>
+<!ATTLIST PrivateRegistrationActive
+	Selection (True | False) #REQUIRED
+>
+<!ELEMENT WithWebFwd EMPTY>
+<!ATTLIST WithWebFwd
+	Selection (True | False) #REQUIRED
+>
+<!-- For backward compatibility ExpirationDate, PurchaseDate, DomainName are defined here -->
+<!ELEMENT CreatedDateRange (DateRange)>
+<!ELEMENT PurchaseDateRange (DateRange)>
+<!ELEMENT ExpirationDateRange (DateRange)>
+<!ELEMENT DomainName (#PCDATA)>
+<!ELEMENT WildCardSearch (StartsWith | Contains | EndsWith)>
+<!ELEMENT StartsWith (#PCDATA)>
+<!ELEMENT Contains (#PCDATA)>
+<!ELEMENT EndsWith (#PCDATA)>
+<!ELEMENT SSLProductStatus EMPTY>
+<!ATTLIST SSLProductStatus
+	Selection (ProvideDomain | DomainConfigured | TermStarted | Issued | BeingReissued | Expired | BeingRenewed | Renewed) #REQUIRED
+>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of referenced common elements. ======================= -->
+<!-- ===================================================================== -->
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,15 @@
+<!-- ===================================================================== -->
+<!-- ====  Web Forwarding product actions =========================== -->
+<!-- ===================================================================== -->
+<!-- ====  Create Web Forwarding for existing domain ==== -->
+<!ELEMENT CreateWebForwarding (WebForwardingProduct+, PurchasePeriod)>
+<!-- ====  Modify Web Forwarding products only ===================== -->
+<!ELEMENT ModifyWebForwarding (WebForwardingProduct+)>
+<!-- ====  Delete Web Forwarding products only ===================== -->
+<!ELEMENT DeleteWebForwarding (DomainName+)>
+<!-- ====  Renew Web Forwarding products only ====================== -->
+<!ELEMENT RenewWebForwarding (DomainName+, PurchasePeriod)>
+<!-- ====  Webforwarding elements ====================== -->
+<!ELEMENT WebForwardingProduct (DomainName, DestURL?, Masking?)>
+<!ELEMENT DestURL (#PCDATA)>
+<!ELEMENT Masking (#PCDATA)>

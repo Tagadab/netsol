@@ -1,0 +1,118 @@
+<!-- ===================================================================== -->
+<!-- ====  User Request Message and Body Declaration. ==================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT UserRequest (RequestHeader, Body)>
+<!ELEMENT Body (
+	( CreateIndividual | 
+	  CreateBusiness | 
+	  ModifyIndividual	|
+	  ModifyBusiness | 
+	  IndividualNewInfo | 
+	  BusinessNewInfo |
+	  CreateRegistryContact |
+	  ExtendCARegistrantApproval ) ) >
+	  
+<!ELEMENT CreateIndividual (
+   LoginName?, 
+   Password, 
+   FirstName, 
+   MiddleName?, 
+   LastName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email, 
+   AuthQuestion, 
+   AuthAnswer,
+   SupplementalRegistryData?) >
+	
+<!ELEMENT ModifyIndividual (
+   AuthorizedAgent, 
+   CustomerID, 
+   NewLoginName?, 
+   NewPassword?, 
+   FirstName?, 
+   MiddleName?, 
+   LastName?, 
+   Address?, 
+   Phone?, 
+   Fax?, 
+   Email?, 
+   (AuthQuestion, AuthAnswer)?,
+   SupplementalRegistryData? ) >
+	
+<!ELEMENT CreateBusiness (
+   LoginName?, 
+   Password, 
+   CompanyName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email, 
+   LegalContact, 
+   AuthQuestion, 
+   AuthAnswer,
+   SupplementalRegistryData?) >
+	
+<!ELEMENT ModifyBusiness (
+   AuthorizedAgent, 
+   CustomerID, 
+   NewLoginName?, 
+   NewPassword?, 
+   CompanyName?, 
+   Address?, 
+   Phone?, 
+   Fax?, 
+   Email?, 
+   LegalContact?, 
+   (AuthQuestion, AuthAnswer)?,
+   SupplementalRegistryData? ) >
+
+<!-- Remove all old information and replace with new. -->
+<!ELEMENT IndividualNewInfo (
+   AuthorizedAgent, 
+   CustomerID, 
+   FirstName, 
+   MiddleName?, 
+   LastName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email ) >
+
+<!-- Remove all old information and replace with new. -->
+<!ELEMENT BusinessNewInfo (
+   AuthorizedAgent, 
+   CustomerID, 
+   CompanyName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email, 
+   LegalContact ) >
+   
+   	
+<!-- ==== Create user login name, password at Registry for specific TLDs ===== -->
+<!ELEMENT CreateRegistryContact (
+   AuthorizedAgent, 
+   CustomerID, 
+   RegistryContact) >
+
+
+<!ELEMENT NewLoginName (#PCDATA)>
+<!ELEMENT NewPassword (#PCDATA)>
+<!ELEMENT RegistryContact (DotTELRegistryContact?)>
+<!ELEMENT DotTELRegistryContact (LoginName, Password)>
+
+<!-- === Extend .CA Registrant approval request ======= -->
+<!ELEMENT ExtendCARegistrantApproval (AuthorizedAgent, CustomerID)>
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+
+<!-- sccsID "%TC-INFO%" -->

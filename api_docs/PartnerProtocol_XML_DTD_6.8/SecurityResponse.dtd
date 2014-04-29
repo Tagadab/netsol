@@ -1,0 +1,21 @@
+<!-- ===================================================================== -->
+<!-- ====  Security Response Message and Body Declaration. =============== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT SecurityResponse (ResponseHeader, Body) >
+<!ELEMENT Body (Status, UserData?) >
+
+<!ELEMENT UserData (
+	OrgName?, 
+	FirstName?, 
+	MiddleName?, 
+	LastName? ) >
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ReponseHeader SYSTEM "ResponseHeader.dtd">
+%ReponseHeader;
+
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,31 @@
+<!-- ===================================================================== -->
+<!-- ====  This DTD remains for backward compatibility. ================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT EmailForwardingLookupResponse ( ResponseHeader, Body ) >
+
+<!ELEMENT Body ( Status, EmailForwarding? ) >
+
+<!ELEMENT EmailForwarding (
+	ProductID,
+	ProductStatus,
+	CustomerID, 
+	PurchaseDate, 
+	ExpirationDate, 
+	EmailAddress,
+	ForwardingEmailAddress ) >
+
+<!ELEMENT EmailAddress (#PCDATA)>
+<!ELEMENT ForwardingEmailAddress (#PCDATA)>
+<!ELEMENT PurchaseDate (#PCDATA)>
+<!ELEMENT ExpirationDate (#PCDATA)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+
+<!-- sccsID "%TC-INFO%" -->

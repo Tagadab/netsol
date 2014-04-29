@@ -1,0 +1,53 @@
+<!-- ===================================================================== -->
+<!-- ====  Domain Availability Request Message and Body Declaration. ===== -->
+<!-- ===================================================================== -->
+<!ELEMENT AvailableRequest (RequestHeader, Body)>
+<!ELEMENT Body (VerifyDomainName+ | VerifyDomains | GenerateDomains | VerifyDomainsAdvanced | GenerateDomainsAdvanced | VerifyDomainsAll | GenerateDomainsAll | IsDomainCandidateForInboundTransfer+ | IsDomainCandidateForInternalTransfer+)>
+<!-- ===================================================================== -->
+<!-- ====  Domain Availability Action Declarations. ===== -->
+<!-- ===================================================================== -->
+<!ELEMENT VerifyDomainName (#PCDATA)>
+<!-- VerifyDomainName - Check availability of a domain name -->
+<!ELEMENT VerifyDomains (#PCDATA)>
+<!-- VerifyDomains - Check availability of a second level domain name in -->
+<!-- the com, net, org, info, biz us.com, mobi, tv  top level domains. -->
+<!ELEMENT GenerateDomains (#PCDATA)>
+<!-- GenerateDomains - Check availability of a second level domain name in -->
+<!-- the com, net, org, info, biz us.com, mobi, tv top level domains and 
+generated additional domain names under the com  TLD. -->
+<!ELEMENT VerifyDomainsAdvanced (Domain, TLD+)>
+<!-- VerifyDomainsAdvanced - Check availability of a second level domain name in -->
+<!-- the com, net, org, info, biz us.com, mobi, tv top level domains and any additional TLDs specified. -->
+<!ELEMENT GenerateDomainsAdvanced (Domain, TLD+, GetMisspelledListOnly?)>
+<!-- GenerateDomainsAdvanced - Generate alternative domain names on 
+the com  as well as TLDs passed in and  check their availability. 
+ If GetMisspelledListOnly is True, return the misspelled list only.-->
+<!ELEMENT GenerateDomainsAll (#PCDATA)>
+<!-- GenerateDomainsAll -Generate alternative domain names on all supported TLDs
+and check their availability.-->
+<!ELEMENT VerifyDomainsAll (#PCDATA)>
+<!-- VerifyDomainsAll - Check availability of a second level domain name in -->
+<!-- all supported top level domains. -->
+<!ELEMENT IsDomainCandidateForInboundTransfer (#PCDATA)>
+<!-- IsDomainCandidateForInboundTransfer - Assess whether a domain might be a -->
+<!-- candidate for Inbound Transfer. -->
+<!ELEMENT IsDomainCandidateForInternalTransfer (#PCDATA)>
+<!-- IsDomainCandidateForInternalTransfer - Assess whether a domain might be a -->
+<!-- candidate for an Internal Customer to Customer Transfer. -->
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!-- Domain name or word without a tld -->
+<!ELEMENT Domain (#PCDATA)>
+<!-- TLD, Top Level Domain name -->
+<!ELEMENT TLD (#PCDATA)>
+<!ELEMENT GetMisspelledListOnly EMPTY>
+<!ATTLIST GetMisspelledListOnly
+	Selection (True | False) #REQUIRED
+>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,43 @@
+<!-- ===================================================================== -->
+<!-- ====  Product Order Response Message and Body Declaration. ========== -->
+<!-- ===================================================================== -->
+<!ELEMENT OrderResponse (ResponseHeader, Body)>
+<!ELEMENT Body (Order*, Status?, NumberOfRecordsReturned?, NumberOfRecordsAvailable?)>
+<!-- ===================================================================== -->
+<!-- ==== Status of an Order and its contained LineItems. ================ -->
+<!-- ===================================================================== -->
+<!ELEMENT Order (ReferenceNumber, Status, OrderID?, OrderAction, Customer, Price?, TieredPrice?, LineItem*, OrderSubmissionDate?, NumberOfRecordsReturned?, NumberOfRecordsAvailable?)>
+<!ELEMENT LineItem (LineItemID?, Status, ProductType, ProductID?, DomainName?, AuthCode?, Name?, LineItemDetail?, Price?, TaxDisclaimer?, SSLDetail?)>
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!-- OrderAction examples, Create, Modify, etc. -->
+<!ELEMENT OrderAction (#PCDATA)>
+<!-- The date the order was submitted.  Date format: YYYY-MM-DDThh:mm:ssTZD -->
+<!ELEMENT OrderSubmissionDate (#PCDATA)>
+<!ELEMENT DomainName (#PCDATA)>
+<!ELEMENT AuthCode (#PCDATA)>
+<!ELEMENT Customer (UserID)>
+<!ELEMENT LineItemDetail (DomainLineItemDetail)>
+<!ELEMENT DomainLineItemDetail (DomainReservationStatus)>
+<!ELEMENT DomainReservationStatus EMPTY>
+<!ATTLIST DomainReservationStatus
+	DomainReservationStatusType (Reserved | Queued) #REQUIRED
+>
+<!ELEMENT TaxDisclaimer (#PCDATA)>
+<!-- The total price of a product line item or an order. -->
+<!ELEMENT Price (#PCDATA)>
+<!ELEMENT TieredPrice EMPTY>
+<!ATTLIST TieredPrice
+	Selection (True | False) #REQUIRED
+>
+<!ELEMENT SSLDetail (Certificate?, SealHeader?, SealBody?)>
+<!ELEMENT Certificate (#PCDATA)>
+<!ELEMENT SealHeader (#PCDATA)>
+<!ELEMENT SealBody (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+<!-- sccsID "%TC-INFO%" -->

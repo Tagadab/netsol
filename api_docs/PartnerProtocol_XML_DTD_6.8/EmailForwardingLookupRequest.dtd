@@ -1,0 +1,25 @@
+<!-- ===================================================================== -->
+<!-- ====  This DTD remains for backward compatibility. ================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT EmailForwardingLookupRequest (RequestHeader, Body ) >
+
+<!ELEMENT Body (AuthorizedAgent, LookupEmailForwarding ) >
+
+ 
+<!-- ===================================================================== -->
+<!-- ==== Product Lookup queries and Element returned in lookup reply. === -->
+<!-- ===================================================================== -->
+
+<!ELEMENT LookupEmailForwarding (EmailAddress | ProductID ) >
+<!ELEMENT EmailAddress (#PCDATA)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+
+<!-- sccsID "%TC-INFO%" -->

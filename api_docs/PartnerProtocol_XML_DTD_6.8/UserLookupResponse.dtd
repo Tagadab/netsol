@@ -1,0 +1,47 @@
+<!-- ===================================================================== -->
+<!-- ====  User Lookup Response Message and Body Declaration. ============ -->
+<!-- ===================================================================== -->
+
+<!ELEMENT UserLookupResponse (ResponseHeader, Body)>
+<!ELEMENT Body (Status, User*)>
+<!ELEMENT User (Individual | Business)>
+
+<!ELEMENT Individual (
+   UserID, 
+   NicHandle?, 
+   LoginName?, 
+   FirstName, 
+   MiddleName?, 
+   LastName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email, 
+   AuthQuestion, 
+   AuthAnswer,
+   SupplementalRegistryData?,
+   Password? ) >
+	
+<!ELEMENT Business (
+   UserID, 
+   NicHandle?, 
+   LoginName?, 
+   CompanyName, 
+   Address, 
+   Phone, 
+   Fax?, 
+   Email?, 
+   LegalContact, 
+   AuthQuestion, 
+   AuthAnswer,
+   SupplementalRegistryData? ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+
+<!-- sccsID "%TC-INFO%" -->

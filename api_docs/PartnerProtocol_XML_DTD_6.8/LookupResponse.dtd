@@ -1,0 +1,38 @@
+<!-- ===================================================================== -->
+<!-- ====  Product Lookup Response Declaration. ========================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT LookupResponse (ResponseHeader, Body ) >
+
+
+<!-- ===================================================================== -->
+<!-- ====  Products returned from the lookup request. ==================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT Body (
+   (Domain* |
+    HostData*), 
+    Status ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+	
+<!-- For backward compatibility ExpirationDate and PurchaseDate are defined here -->
+<!ELEMENT ExpirationDate (#PCDATA ) >
+<!ELEMENT PurchaseDate (#PCDATA ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+<!ENTITY % DomainProduct SYSTEM "DomainProduct.dtd">
+%DomainProduct;
+<!ENTITY % HostProduct SYSTEM "HostProduct.dtd">
+%HostProduct;
+
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,17 @@
+<!-- ===================================================================== -->
+<!-- ====  Message Request Header Declarations =========================== -->
+<!-- ===================================================================== -->
+<!ELEMENT RequestHeader (VERSION_6_8, Authentication, Comments?, SystemInfo?, RequestProperty*)>
+<!ELEMENT Authentication (PartnerID, PartnerPassword)>
+<!ELEMENT PartnerID (#PCDATA)>
+<!ELEMENT PartnerPassword (#PCDATA)>
+<!ELEMENT SystemInfo (#PCDATA)>
+<!ELEMENT RequestProperty (PropertyName, PropertyValue)>
+<!ELEMENT PropertyName (#PCDATA)>
+<!ELEMENT PropertyValue (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % CommonDeclarations SYSTEM "CommonDeclarations.dtd">
+%CommonDeclarations;
+<!-- sccsID "%TC-INFO%" -->

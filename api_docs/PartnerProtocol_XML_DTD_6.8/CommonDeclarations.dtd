@@ -1,0 +1,173 @@
+<!-- ===================================================================== -->
+<!-- ====  Common element declarations =================================== -->
+<!-- ===================================================================== -->
+<!-- ===================================================================== -->
+<!-- ====  User and Customer Related Common element declarations ========= -->
+<!-- ===================================================================== -->
+<!ELEMENT AuthorizedAgent (SystemUser)>
+<!ATTLIST AuthorizedAgent
+	SystemUserType (customer | partner) #REQUIRED
+>
+<!ELEMENT SystemUser ((UserID | NicHandle), Password)>
+<!ELEMENT UserID (#PCDATA)>
+<!ELEMENT CustomerID (#PCDATA)>
+<!ELEMENT NicHandle (#PCDATA)>
+<!ELEMENT Password (#PCDATA)>
+<!ELEMENT OrgName (#PCDATA)>
+<!ELEMENT FirstName (#PCDATA)>
+<!ELEMENT MiddleName (#PCDATA)>
+<!ELEMENT LastName (#PCDATA)>
+<!ELEMENT LoginName (#PCDATA)>
+<!ELEMENT CompanyName (#PCDATA)>
+<!ELEMENT Phone (#PCDATA)>
+<!ELEMENT Fax (#PCDATA)>
+<!ELEMENT Email (#PCDATA)>
+<!ELEMENT AuthQuestion (#PCDATA)>
+<!ELEMENT AuthAnswer (#PCDATA)>
+<!ELEMENT Address (AddressLine1, AddressLine2?, AddressLine3?, AddressLine4?, AddressLine5?, City?, State?, PostalCode?, CountryCode)>
+<!ELEMENT AddressLine1 (#PCDATA)>
+<!ELEMENT AddressLine2 (#PCDATA)>
+<!ELEMENT AddressLine3 (#PCDATA)>
+<!ELEMENT AddressLine4 (#PCDATA)>
+<!ELEMENT AddressLine5 (#PCDATA)>
+<!ELEMENT City (#PCDATA)>
+<!ELEMENT State (#PCDATA)>
+<!ELEMENT PostalCode (#PCDATA)>
+<!ELEMENT CountryCode (#PCDATA)>
+<!ELEMENT POBox (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ====  Product Related Common element declarations =================== -->
+<!-- ===================================================================== -->
+<!ELEMENT ProductID (#PCDATA)>
+<!-- ==== ServiceInstID is an ID for a specific instance of product (i.e. an SSL Certificate or Seal) ==-->
+<!ELEMENT ServiceInstID (#PCDATA)>
+<!ELEMENT PurchasePeriod (#PCDATA)>
+<!ELEMENT BulkWhoisOptOut (#PCDATA)>
+<!ELEMENT ProductStatus (#PCDATA)>
+<!ELEMENT Billing (DiscountCode?, AutoRenew?, IsPricingRequest?)>
+<!ELEMENT DiscountCode (#PCDATA)>
+<!ELEMENT AutoRenew (#PCDATA)>
+<!ELEMENT TechContact (UserID | NicHandle)>
+<!ELEMENT AdminContact (UserID | NicHandle)>
+<!ELEMENT BillContact (UserID | NicHandle)>
+<!ELEMENT LegalContact (FirstName, MiddleName?, LastName, Address?, Phone?, Fax?, Email?)>
+<!ELEMENT LegalContactFirstName (#PCDATA)>
+<!ELEMENT LegalContactMiddleName (#PCDATA)>
+<!ELEMENT LegalContactLastName (#PCDATA)>
+<!-- Name of the product instance.  e.g. domain name, host name, email name -->
+<!ELEMENT Name (#PCDATA)>
+<!-- The following two elements are used to refer to customers as part of transfer requests -->
+<!ELEMENT FromCustomer (UserID)>
+<!ELEMENT ToCustomer (UserID)>
+<!-- Name of the product type. e.g. Registration, Host, Email -->
+<!ELEMENT ProductType (#PCDATA)>
+<!-- If DomainProtect is set to True on a domain then outbound transfer is not allowed -->
+<!ELEMENT DomainProtect EMPTY>
+<!ATTLIST DomainProtect
+	Selection (True | False) #REQUIRED
+>
+<!ELEMENT LegalLock EMPTY>
+<!ATTLIST LegalLock
+	Selection (True | False) #REQUIRED
+>
+<!ELEMENT URL (#PCDATA)>
+<!-- Indicates that the requiest should just be priced and not submitted. -->
+<!ELEMENT IsPricingRequest EMPTY>
+<!-- Subscriber's agreement -->
+<!ELEMENT SubscribersAgreement EMPTY>
+<!ATTLIST SubscribersAgreement
+	Selection (True | False) #REQUIRED
+>
+<!ELEMENT AccuracyAgreement EMPTY>
+<!ATTLIST AccuracyAgreement
+	Selection (True | False) #REQUIRED
+>
+
+<!-- ===================================================================== -->
+<!-- ====  TLD Specific Customer Data Element Declarations =============== -->
+<!-- ===================================================================== -->
+<!ELEMENT SupplementalRegistryData (DotUSSupplementalData?, DotDESupplementalData?, 
+DotAUSupplementalData?, DotEUSupplementalData?, DotCASupplementalData?)>
+<!-- Classification of a domain names registrant, and the possible usage of the domain. -->
+<!-- Used for: .us -->
+<!ELEMENT DotUSSupplementalData EMPTY>
+<!ATTLIST DotUSSupplementalData
+	CustomerType (PersonUSCitizen | PersonPermanentUSResident | OrganizationIncorporatedInUS | OrganizationWithActiveUSPresence | OrganizationWithUSPresence) #REQUIRED
+	AnticipatedUsage (ForProfit | NotForProfit | Personal | Educational | Governmental) #REQUIRED
+>
+<!ELEMENT DotDESupplementalData (UseDefaultRegistrantAddress)>
+<!ELEMENT DotAUSupplementalData (LegalIdentificationNumber)>
+<!-- Legal registration or identification number of a business or -->
+<!-- legal identification number of an individual. -->
+<!ELEMENT LegalIdentificationNumber (#PCDATA)>
+<!-- Indicates that a default, in-country registrant address should be used. -->
+<!ELEMENT UseDefaultRegistrantAddress EMPTY>
+<!ATTLIST UseDefaultRegistrantAddress
+	Selection (True | False) #REQUIRED
+>
+<!-- EU NEXUS elements -->
+<!ELEMENT DotEUSupplementalData EMPTY>
+<!ATTLIST DotEUSupplementalData
+	CustomerType (RegisteredOfficeInEU | OrganizationIncorporatedInEU | ResidentInEU) #REQUIRED
+	NaturalPerson CDATA #FIXED "True"
+>
+
+<!-- CA NEXUS elements -->
+<!ELEMENT DotCASupplementalData EMPTY>
+<!ATTLIST DotCASupplementalData
+      CIRAAgreement (True | False) #REQUIRED
+      CustomerType (Citizen | PermanentResident | LegalRepresentative | Corporation | EstablishedTrust |
+                        RegisteredPartner | Association | TradeUnion | PoliticalParty | EducationalInstitution |
+                        LibraryArchiveMuseum | Hospital | HerMajestyTheQueen | RecognizedIndianBand |
+                        AboriginalPeoples | GovernmentEntity | RegisteredTrademarkHolder | OfficialMarkHolder) #REQUIRED
+>
+
+<!-- ===================================================================== -->
+<!-- ====  Look up domain auth Element Declarations =============== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT AuthCodeLookup (AuthForDomainName+)>
+<!ELEMENT AuthForDomainName (#PCDATA)>
+<!ELEMENT DomainAuthCodeInfo (DomainInfoName, DomainAuthCodeValue)>
+<!ELEMENT DomainInfoName (#PCDATA)>
+<!ELEMENT DomainAuthCodeValue (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ====  Request and Order Related Common element declarations ========= -->
+<!-- ===================================================================== -->
+<!ELEMENT Status (StatusCode, Description, ValidationError*)>
+<!ELEMENT StatusCode (#PCDATA)>
+<!ELEMENT Comments (#PCDATA)>
+<!ELEMENT Description (#PCDATA)>
+<!ELEMENT ValidationError (PathName, StatusCode, Description)>
+<!ELEMENT PathName (#PCDATA)>
+<!ELEMENT ReferenceNumber (#PCDATA)>
+<!ELEMENT OrderID (#PCDATA)>
+<!ELEMENT LineItemID (#PCDATA)>
+<!-- Number of records returned in a response.  This is a signed 64-bit integer -->
+<!ELEMENT NumberOfRecordsReturned (#PCDATA)>
+<!-- Total number of records in the system. If the total number of records -->
+<!-- returned is less than the number of records available, narrow the -->
+<!-- date parameters until values are equal. This is a signed 64-bit integer -->
+<!ELEMENT NumberOfRecordsAvailable (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ====  General Common element declarations =========================== -->
+<!-- ===================================================================== -->
+<!-- Begin and end dates for a date range -->
+<!ELEMENT DateRange (BeginDate, EndDate)>
+<!ELEMENT BeginDate (Date | LongDate)>
+<!ELEMENT EndDate (Date | LongDate)>
+<!-- Date format is Month, Day, Year, minutes, -->
+<!-- seconds, and milliseconds in the format of -->
+<!-- Month 01 through 12, Day 01 through 31, -->
+<!-- Year 1970 through Present year as a four digit year, -->
+<!-- Minutes 00 through 59, Seconds 00 through 59, -->
+<!-- Milliseconds 0 through 5900, YYYY-MM-DDThh:mm:ssTZD format -->
+<!ELEMENT Date (#PCDATA)>
+<!-- Time in milliseconds GMT since epoch (00:00:00 UTC January 1, 1970). -->
+<!-- This is an signed 64-bit integer. -->
+<!ELEMENT LongDate (#PCDATA)>
+<!-- Time of the request in the following format: YYYY-MM-DDThh:mm:ssTZD  -->
+<!ELEMENT Timestamp (#PCDATA)>
+<!-- DTD Version identifier. -->
+<!ELEMENT VERSION_6_8 EMPTY>
+<!-- sccsID "%TC-INFO%" -->

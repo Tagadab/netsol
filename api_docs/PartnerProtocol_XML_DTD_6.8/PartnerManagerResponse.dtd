@@ -1,0 +1,64 @@
+<!-- ===================================================================== -->
+<!-- ====  Partner Manager Response Message and Body Declaration. ======== -->
+<!-- ===================================================================== -->
+<!ELEMENT PartnerManagerResponse (ResponseHeader, Body)>
+<!ELEMENT Body (Status, (Domain* | Customer* | CustomerProductConsolidationResult | PartnerData | DomainName* | PreRegisteredDomain* | Product*), DateRange?, NumberOfRecordsReturned?, NumberOfRecordsAvailable?)>
+<!-- ===================================================================== -->
+<!-- ====  Elements returned from the partner manager request. =========== -->
+<!-- ===================================================================== -->
+<!ELEMENT Domain (ProductID?, DomainName, ProductType, DomainProtect, LegalLock, NicHandle?, AutoRenew, PurchaseDate, ExpirationDate, BulkWhoisOptOut?, CustomerID?)>
+<!ELEMENT PreRegisteredDomain (ProductID?, DomainName, ProductType, (Phase? | Phase1? | Phase2?), LanguageSelection?, PreRegStatus?, RequestedDate?, AccountID?, IndustryStatus?, DomainPurchasePeriod?, TradeMarkName?,TradeMarkCountryCode?, RegistrationNumberDetails?, RegsitrationDateInfo?, ExistingDomainInfo?, ApplicantCapacity?, AccountHolder?, OrgName?, FirstName?, LastName?, ApplicationId?)>
+<!ELEMENT Customer (Individual | Business)>
+<!ELEMENT Individual (UserID, NicHandle?, LoginName?, FirstName, MiddleName?, LastName)>
+<!ELEMENT Business (UserID, NicHandle?, LoginName?, CompanyName, LegalContactFirstName, LegalContactMiddleName?, LegalContactLastName)>
+<!ELEMENT CustomerProductConsolidationResult (FromCustomer, ToCustomer, ProductConsolidationResult*)>
+<!ELEMENT ProductConsolidationResult ((DomainName | ProductID), Status)>
+<!ELEMENT PartnerData (AccountBalance?)>
+<!ATTLIST PartnerData
+	AccountStatus (ACTIVE | SUSPENDED) #REQUIRED
+>
+<!ELEMENT Product (ProductID, ProductType, Name, DomainName?, PurchasePeriod?, PurchaseDate?, ExpirationDate, CustomerID?, Status, IsRenewable?, IsReissueable?, HasEverBeenIssued?, SSLInstance*)>
+<!ELEMENT SSLInstance (ServiceInstID, CSR?, ServerSelectionID?, DomainName?, IssuedDate?, IsRevocable?, IsDownloadable?, ValidationContact, OrderContact,CertificateRequester?, CertificateApprover?, ContractSigner?)>
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+<!-- For backward compatibility ExpirationDate, PurchaseDate, DomainName are defined here -->
+<!ELEMENT PurchaseDate (Date)>
+<!ELEMENT ExpirationDate (Date)>
+<!ELEMENT DomainName (#PCDATA)>
+<!ATTLIST DomainName
+	encoded CDATA "false"
+>
+<!ELEMENT AccountBalance (#PCDATA)>
+<!-- PreRegistration query -->
+<!ELEMENT Phase (#PCDATA)>
+<!ELEMENT Phase1 (#PCDATA)>
+<!ELEMENT Phase2 (#PCDATA)>
+<!ELEMENT LanguageSelection (#PCDATA)>
+<!ELEMENT PreRegStatus (#PCDATA)>
+<!ELEMENT RequestedDate (#PCDATA)>
+<!ELEMENT AccountID (#PCDATA)>
+<!ELEMENT IndustryStatus (#PCDATA)>
+<!ELEMENT DomainPurchasePeriod (#PCDATA)>
+<!ELEMENT TradeMarkName (#PCDATA)>
+<!ELEMENT TradeMarkCountryCode (#PCDATA)>
+<!ELEMENT RegistrationNumberDetails (#PCDATA)>
+<!ELEMENT RegsitrationDateInfo (#PCDATA)>
+<!ELEMENT ExistingDomainInfo (#PCDATA)>
+<!ELEMENT ApplicantCapacity (#PCDATA)>
+<!ELEMENT AccountHolder (#PCDATA)>
+<!ELEMENT ApplicationId (#PCDATA)>
+<!ELEMENT IsRevocable (#PCDATA)>
+<!ELEMENT IssuedDate (#PCDATA)>
+<!ELEMENT IsDownloadable (#PCDATA)>
+<!ELEMENT IsRenewable (#PCDATA)>
+<!ELEMENT IsReissueable (#PCDATA)>
+<!ELEMENT HasEverBeenIssued (#PCDATA)>
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+<!ENTITY % SSLProduct SYSTEM "SSLProduct.dtd">
+%SSLProduct;
+<!-- sccsID "%TC-INFO%" -->

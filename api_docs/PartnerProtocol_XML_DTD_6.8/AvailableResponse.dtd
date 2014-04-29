@@ -1,0 +1,81 @@
+<!-- ===================================================================== -->
+<!-- ====  Domain Availability Response Message and Body Declaration. ==== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT AvailableResponse (
+	ResponseHeader, 
+	Body ) >
+
+<!ELEMENT Body (
+   Available?, 
+   NotAvailable?, 
+   Premium?, 
+   Invalid?, 
+   Failed?,
+   MayBeTransferrable?,
+   NotTransferrable?  ) >
+
+<!-- Domains that are available -->
+<!ELEMENT Available (DomainName, RespondingService )* >
+
+<!-- Domains that are not available -->
+<!ELEMENT NotAvailable (DomainName, RespondingService )* >
+
+<!-- Premium domains -->
+<!ELEMENT Premium (DomainName, RespondingService )* >
+
+<!-- Domains that failed due to temporary unavailabiility of the target registry -->
+<!ELEMENT Failed (DomainName )* >
+
+<!-- Domains that may be transferrable -->
+<!ELEMENT MayBeTransferrable (DomainName, TransferDetail )* >
+
+<!-- Domains that are not transferrable -->
+<!ELEMENT NotTransferrable (DomainName, NotTransferrableReasons )* >
+
+<!-- Domains with invalid syntax -->
+<!ELEMENT Invalid (DomainName )* >
+
+<!ELEMENT DomainName (#PCDATA ) >
+<!ATTLIST DomainName price CDATA #IMPLIED encoded CDATA "false" >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!-- The service that provided the name availability response -->
+<!ELEMENT RespondingService EMPTY >
+<!ATTLIST RespondingService ServiceName (
+   Registry |
+   Whois |
+   ZoneFiles |
+   LocalCache |
+   NotIndicated ) #REQUIRED >
+
+<!-- The details about the transfer candidate -->
+<!ELEMENT TransferDetail (InternalTransferDetail?) >
+<!ATTLIST TransferDetail TransferType (Inbound | Internal) #REQUIRED >
+
+<!-- The details about the internal transfer candidate -->
+<!ELEMENT InternalTransferDetail (InternalTransferCategory, ProductType) >
+
+<!-- The interal transfer candidate category -->
+<!ELEMENT InternalTransferCategory EMPTY >
+<!ATTLIST InternalTransferCategory InternalTransferCategorySelection (
+	RetailToWholesale |
+	WholesaleToWholesaleInPartner |
+	WholesaleToWholesaleCrossPartner) #REQUIRED >
+
+<!-- The reason(s) why a domain is not a candidate for transfer -->
+<!ELEMENT NotTransferrableReasons (NotTransferrableReason+) >
+<!ELEMENT NotTransferrableReason (StatusCode, Description) >
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % ResponseHeader SYSTEM "ResponseHeader.dtd">
+%ResponseHeader;
+
+<!-- sccsID "%TC-INFO%" -->

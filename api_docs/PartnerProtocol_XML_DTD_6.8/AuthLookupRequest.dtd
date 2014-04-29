@@ -1,0 +1,30 @@
+<!-- ===================================================================== -->
+<!-- ====  Product AuthLookup Request Message and Body Declaration. ========== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT AuthLookupRequest ( RequestHeader, Body ) >
+	
+<!ELEMENT Body (
+   AuthorizedAgent, 
+   CustomerID?, 
+   (AuthCodeLookup )) >
+<!-- ==========AuthCodeLookup? or LookupDomainAuth? =========================================================== -->
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!-- For backward compatibility ExpirationDate and PurchaseDate are defined here -->
+<!ELEMENT ExpirationDate (#PCDATA)>
+<!ELEMENT PurchaseDate (#PCDATA)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+
+
+<!-- sccsID "%TC-INFO%" -->

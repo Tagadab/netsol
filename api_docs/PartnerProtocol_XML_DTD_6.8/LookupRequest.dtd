@@ -1,0 +1,34 @@
+<!-- ===================================================================== -->
+<!-- ====  Product Lookup Request Message and Body Declaration. ========== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT LookupRequest ( RequestHeader, Body ) >
+	
+<!ELEMENT Body (
+   AuthorizedAgent, 
+   CustomerID?, 
+   (LookupDomain |
+    LookupHost) ) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!-- For backward compatibility ExpirationDate and PurchaseDate are defined here -->
+<!ELEMENT ExpirationDate (#PCDATA)>
+<!ELEMENT PurchaseDate (#PCDATA)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!ENTITY % RequestHeader SYSTEM "RequestHeader.dtd">
+%RequestHeader;
+<!ENTITY % DomainProduct SYSTEM "DomainProduct.dtd">
+%DomainProduct;
+<!ENTITY % HostProduct SYSTEM "HostProduct.dtd">
+%HostProduct;
+
+<!-- sccsID "%TC-INFO%" -->

@@ -1,0 +1,72 @@
+<!-- ===================================================================== -->
+<!-- ==== Product actions ================================================ -->
+<!-- ===================================================================== -->
+
+<!ELEMENT CreateHost (NewHost+)>
+<!ELEMENT ModifyHost (Host+)>
+<!ELEMENT DeleteHost ((HostID | HostName)+)>
+
+
+<!-- ===================================================================== -->
+<!-- ==== Product Lookup queries and Element returned in lookup reply. === -->
+<!-- ===================================================================== -->
+
+<!ELEMENT LookupHost (HostName+ | HostID | HostIP ) >
+
+<!-- The ability to lookup a host using HostID and HostIP have been deprecated. -->
+<!-- Please do not use these elements to lookup hosts. -->
+
+<!ELEMENT HostData (
+	HostID,
+	HostName,
+	HostCoordinator?,
+	HostIP1?,
+	HostIP2?,
+	HostIP3?,
+	HostIP4?,
+	HostIP5? ) >
+
+<!-- HostID and HostCoordinator elements have been deprecated. Please do not use these elements -->
+
+<!-- ===================================================================== -->
+<!-- ==== Base element declarations ====================================== -->
+<!-- ===================================================================== -->
+
+<!ELEMENT NewHost (
+	HostName, 
+	HostCoordinator?, 
+	HostIP1, 
+	HostIP2?, 
+	HostIP3?, 
+	HostIP4?, 
+	HostIP5? ) >
+	
+<!ELEMENT Host (
+	(HostID | HostName), 
+	HostCoordinator?, 
+	HostIP1?, 
+	HostIP2?, 
+	HostIP3?, 
+	HostIP4?, 
+	HostIP5? ) >
+
+<!-- HostID and HostCoordinator elements have been deprecated. Please do not use these elements -->
+
+<!ELEMENT HostName (#PCDATA) >
+<!ELEMENT HostIP1 (#PCDATA) >
+<!ELEMENT HostIP2 (#PCDATA) >
+<!ELEMENT HostIP3 (#PCDATA) >
+<!ELEMENT HostIP4 (#PCDATA) >
+<!ELEMENT HostIP5 (#PCDATA) >
+<!ELEMENT HostIP (#PCDATA) > 
+<!ELEMENT HostID (#PCDATA) >
+<!ELEMENT HostCoordinator (UserID | NicHandle) >
+
+
+<!-- ===================================================================== -->
+<!-- ==== Inclusion of externally defined elements. ====================== -->
+<!-- ===================================================================== -->
+
+<!--none -->
+
+<!-- sccsID "%TC-INFO%" -->
