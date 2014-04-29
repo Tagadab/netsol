@@ -84,29 +84,46 @@ class Netsol
     # @auto_renew  = nil
   end
 
-  def create_individual
-    raise 'Not yet implemented'
-    # @individual = {
-    #   :login_name  => nil,
-    #   :password    => nil,
-    #   :first_name  => nil,
-    #   :middle_name => nil,
-    #   :last_name   => nil,
-    #   :address => {
-    #     :line_1       => nil,
-    #     :city         => nil,
-    #     :state        => nil,
-    #     :post_code    => nil,
-    #     :country_code => nil
-    #   },
-    #   :phone => nil,
-    #   :fax   => nil,
-    #   :email => nil,
-    #   :auth => {
-    #     :question => nil,
-    #     :answer   => nil
-    #   }
-    # }
+  def create_individual(individual)
+    @individual = {
+      :login_name  => nil,
+      :password    => nil,
+      :first_name  => nil,
+      :middle_name => nil,
+      :last_name   => nil,
+      :address => {
+        :line_1       => nil,
+        :city         => nil,
+        :state        => nil,
+        :post_code    => nil,
+        :country_code => nil
+      },
+      :phone => nil,
+      :fax   => nil,
+      :email => nil,
+      :auth => {
+        :question => nil,
+        :answer   => nil
+      }
+    }.merge(individual)
+
+    response = Nokogiri::XML(transmit(CONFIG[:api][:transaction], request_body).body, &:noblanks)
+
+    status = response.xpath('/UserResponse/Body/Status')
+    status_code = status.xpath('StatusCode/text()')[0].to_s.to_i
+    status_desc = status.xpath('Description/text()')[0].to_s
+    success_codes = [5700, 5703]
+
+    raise "Unable to create individual: [#{status_code}] #{status_desc}" unless success_codes.include?(status_code)
+    
+    {
+      :status => {
+        :code => status_code,
+        :message => status_desc
+      },
+      :user_id => response.xpath('/UserResponse/Body/UserID/text()')[0].to_s.to_i,
+      :login_name => response.xpath('/UserResponse/Body/LoginName/text()')[0].to_s
+    }
   end
 
 private
