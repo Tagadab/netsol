@@ -128,6 +128,10 @@ class Netsol
 
 private
 
+  def root
+    @@root ||= File.expand_path('../..', __FILE__)
+  end
+
   def transmit(location, body)
     https = Net::HTTP.new(@host, location[:port])
     https.use_ssl = true
@@ -141,11 +145,11 @@ private
   def request_body
     method = caller[0][/`([^']*)'/, 1]
 
-    ERB.new(File.read("xml/#{method}.xml.erb")).result(binding)
+    ERB.new(File.read("#{root}/xml/#{method}.xml.erb")).result(binding)
   end
 
   def header
-    @header_xml ||= ERB.new(File.read("xml/header.xml.erb")).result(binding)
+    @header_xml ||= ERB.new(File.read("#{root}/xml/header.xml.erb")).result(binding)
   end
 
 end
