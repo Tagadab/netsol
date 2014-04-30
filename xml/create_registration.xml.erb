@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<OrderRequest>
+  <%= header %>
+  <Body>
+    <AuthorizedAgent SystemUserType="partner">
+      <SystemUser>
+        <UserID><%= @user %></UserID>
+        <Password><%= @pass %></Password>
+      </SystemUser>
+    </AuthorizedAgent>
+    <CustomerID><%= @customer_id %></CustomerID>
+    <Product>
+      <CreateRegistration>
+        <DomainName><%= @domain[:name] %></DomainName>
+        <PurchasePeriod><%= @domain[:purchase_period] %></PurchasePeriod>
+      </CreateRegistration>
+    </Product>
+  </Body>
+</OrderRequest>

@@ -126,6 +126,32 @@ class Netsol
     }
   end
 
+  def create_registration(customer_id, domain, purchase_period)
+    @customer_id = customer_id
+    @domain = {
+      :name => domain,
+      :purchase_period => purchase_period,
+    }
+
+    response = Nokogiri::XML(transmit(CONFIG[:api][:transaction], request_body).body, &:noblanks)
+
+    status = response.xpath('/OrderResponse/Body/Order/Status')
+    status_code = status.xpath('StatusCode/text()')[0].to_s.to_i
+    status_desc = status.xpath('Description/text()')[0].to_s
+    success_codes = [7000]
+
+    raise "Unable to create registration: [#{status_code}] #{status_desc}" unless success_codes.include?(status_code)
+    
+    {
+      :status => {
+        :code => status_code,
+        :message => status_desc
+      },
+      :order_id => response.xpath('/OrderResponse/Body/Order/OrderID/text()')[0].to_s.to_i,
+      :price => response.xpath('/OrderResponse/Body/Order/Price/text()')[0].to_s.to_f
+    }
+  end
+
 private
 
   def root
