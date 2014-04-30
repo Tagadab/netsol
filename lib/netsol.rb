@@ -77,11 +77,25 @@ class Netsol
     end
   end
 
-  def modify_registration
-    raise 'Not yet implemented'
-    # @domain_name = nil
-    # @customer_id = nil
-    # @auto_renew  = nil
+  def modify_registration(customer_id, domain_name, auto_renew)
+    @customer_id,@domain_name,@auto_renew = customer_id,domain_name,auto_renew
+    response = Nokogiri::XML(transmit(CONFIG[:api][:transaction], request_body).body, &:noblanks)
+    
+    status = response.xpath('/OrderResponse/Body/Order/Status')
+    status_code = status.xpath('StatusCode/text()')[0].to_s.to_i
+    status_desc = status.xpath('Description/text()')[0].to_s
+    success_codes = [7000]
+
+    raise "Unable to modify registration: [#{status_code}] #{status_desc}" unless success_codes.include?(status_code)
+
+    {
+      :status => {
+        :code => status_code,
+        :message => status_desc
+      },
+      :reference_number => response.xpath('/OrderResponse/Body/Order/ReferenceNumber/text()')[0].to_s,
+      :order_id => response.xpath('/OrderResponse/Body/Order/OrderID/text()')[0].to_s
+    }
   end
 
   def create_individual(individual)
