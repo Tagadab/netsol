@@ -1,7 +1,7 @@
 netsol
 ======
 
-NetSol Partners API Gem
+This gem provides easy consumption of the NetSol Partners API (Version 6.8)
 
 ```ruby
 require 'netsol'
