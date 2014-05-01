@@ -1,5 +1,5 @@
 require 'net/https'
-require 'erb'
+require 'haml'
 require 'nokogiri'
 
 class Netsol
@@ -226,11 +226,15 @@ private
   def request_body
     method = caller[0][/`([^']*)'/, 1]
 
-    ERB.new(File.read("#{root}/xml/#{method}.xml.erb")).result(binding)
+    Haml::Engine.new(File.read("#{root}/xml/#{method}.haml")).render(binding)
   end
 
   def header
-    @header_xml ||= ERB.new(File.read("#{root}/xml/header.xml.erb")).result(binding)
+    @header_xml ||= Haml::Engine.new(File.read("#{root}/xml/_header.haml")).render(binding)
+  end
+
+  def auth
+    @auth_xml ||= Haml::Engine.new(File.read("#{root}/xml/_auth.haml")).render(binding)
   end
 
   # This is necessary as including activesupport (outside of rails) is a nightmare prior to v3.0

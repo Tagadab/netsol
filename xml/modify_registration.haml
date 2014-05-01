@@ -1,0 +1,11 @@
+!!! XML
+%OrderRequest
+  = header
+  %Body
+    = auth
+    %CustomerID= @customer_id
+    %Billing
+      %AutoRenew= @auto_renew
+    %Product
+      %ModifyRegistration
+        %DomainName= @domain_name

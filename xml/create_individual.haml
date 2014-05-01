@@ -1,0 +1,21 @@
+!!! XML
+%UserRequest
+  = header
+  %Body
+    %CreateIndividual
+    %LoginName= @individual[:login_name]
+    %Password= @individual[:password]
+    %FirstName= @individual[:first_name]
+    %MiddleName= @individual[:middle_name]
+    %LastName= @individual[:last_name]
+    %Address
+      %AddressLine1= @individual[:address][:line_1]
+      %City= @individual[:address][:city]
+      %State= @individual[:address][:state]
+      %PostalCode= @individual[:address][:post_code]
+      %CountryCode= @individual[:address][:country_code]
+    %Phone= @individual[:phone]
+    %Fax= @individual[:fax]
+    %Email= @individual[:email]
+    %AuthQuestion= @individual[:auth][:question]
+    %AuthAnswer= @individual[:auth][:answer]

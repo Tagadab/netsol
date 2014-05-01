@@ -1,0 +1,10 @@
+!!! XML
+%OrderRequest
+  = header
+  %Body
+    = auth
+    %CustomerID= @customer_id
+    %Product
+      %CreateRegistration
+        %DomainName= @domain[:name]
+        %PurchasePeriod= @domain[:purchase_period]

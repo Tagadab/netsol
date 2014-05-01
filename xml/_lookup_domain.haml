@@ -1,0 +1,11 @@
+!!! XML
+%LookupRequest
+  = header
+  %Body
+    %AuthorizedAgent(SystemUserType="partner")
+      %SystemUser
+        %UserID= @user
+        %Password= @pass
+    %LookupDomain
+      - @domain_names.each do |domain_name|
+        %DomainName= domain_name
