@@ -215,6 +215,7 @@ private
   def transmit(location, body)
     https = Net::HTTP.new(@host, location[:port])
     https.use_ssl = true
+    https.read_timeout = 5 * 60
     https.verify_mode = OpenSSL::SSL::VERIFY_NONE
     response = https.start{ |http| http.post(location[:path], body) }
     raise "Response returned code #{response.code}: #{response.msg}." unless response.code == '200'
