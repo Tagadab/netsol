@@ -31,6 +31,46 @@ class Netsol
     @host = CONFIG[:host][@mode]
   end
 
+  # This is to split the lookup request into smaller requests
+  # (NetSol blocks requests which are too long)
+  def lookup_domain(domain_names)
+    result = {}
+    result[:domains] = {}
+
+    group_array(domain_names, per_group = 100).each do |domain_names_100|
+      result[:domains].merge!(_lookup_domain(domain_names_100)[:domains])
+    end
+
+    result
+  end
+  
+  def _lookup_domain(domain_names)
+    @domain_names = domain_names
+    response = Nokogiri::XML(transmit(CONFIG[:api][:transaction], request_body).body, &:noblanks)
+
+    status = response.xpath('/LookupResponse/Body/Status')
+    status_code = status.xpath('StatusCode/text()')[0].to_s.to_i
+    status_desc = status.xpath('Description/text()')[0].to_s
+    success_codes = [11702]
+
+    raise "Unable to modify registration: [#{status_code}] #{status_desc}" unless success_codes.include?(status_code)
+
+    domains = {}
+    
+    response.xpath('/LookupResponse/Body/Domain').each do |de|
+      domains[de.xpath('DomainNameProperties/text()')[0].to_s] =
+        de.xpath('HostData').map{ |host| host.xpath('HostName/text()')[0].to_s }
+    end
+
+    {
+      :status => {
+        :code => status_code,
+        :message => status_desc
+      },
+      :domains => domains
+    }
+  end
+
   def find_all_customers_for_partner
     response = transmit(CONFIG[:api][:transaction], request_body)
 
@@ -190,6 +230,20 @@ private
 
   def header
     @header_xml ||= ERB.new(File.read("#{root}/xml/header.xml.erb")).result(binding)
+  end
+
+  # This is necessary as including activesupport (outside of rails) is a nightmare prior to v3.0
+  def group_array(array, per_group)
+    container = []
+    array.each do |item|
+      if container.last && container.last.size < per_group
+        container.last << item
+      else
+        container << [item]
+      end
+    end
+
+    container
   end
 
 end

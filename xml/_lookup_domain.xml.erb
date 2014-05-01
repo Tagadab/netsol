@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<LookupRequest>
+  <%= header %>
+  <Body>
+    <AuthorizedAgent SystemUserType="partner">
+      <SystemUser>
+        <UserID><%= @user %></UserID>
+        <Password><%= @pass %></Password>
+      </SystemUser>
+    </AuthorizedAgent>
+    <LookupDomain>
+      <% @domain_names.each do |domain_name| %>
+        <DomainName><%= domain_name %></DomainName>
+      <% end %>
+    </LookupDomain>
+  </Body>
+</LookupRequest>
