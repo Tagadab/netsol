@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'netsol'
-  spec.version       = '0.1'
+  spec.version       = '0.2.0'
   spec.authors       = ['Michael Malet']
   spec.email         = ['michael@tagadab.com']
   spec.description   = %q{A gem to make interacting with NetSol's Partner API less painful}
