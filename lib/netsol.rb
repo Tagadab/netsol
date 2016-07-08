@@ -113,7 +113,9 @@ class Netsol
         :customer_id => domain.xpath('CustomerID/text()')[0].to_s,
         :product_type => domain.xpath('ProductType/text()')[0].to_s,
         :auto_renew => (domain.xpath('AutoRenew/text()')[0].to_s == 'Y'),
-        :domain_protect => domain.xpath('DomainProtect')[0].attr('Selection')
+        :domain_protect => domain.xpath('DomainProtect')[0].attr('Selection'),
+        :purchase_date => domain.xpath('PurchaseDate')[0].child.text,
+        :expiration_date => domain.xpath('ExpirationDate')[0].child.text
       }
     end
   end
