@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'netsol'
   spec.version       = '0.2.0'
   spec.authors       = ['Michael Malet']
-  spec.email         = ['michael@tagadab.com']
+  spec.email         = ['developers@tagadab.com']
   spec.description   = %q{A gem to make interacting with NetSol's Partner API less painful}
   spec.summary       = spec.description
   spec.homepage      = 'http://www.tagadab.com'
